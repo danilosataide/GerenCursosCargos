@@ -41,3 +41,18 @@ Content-Type: application/json
 DELETE http://localhost:8383/funcionario/r0MKu8s3HsumBlj1Xwf9
 Content-Type: application/json
 
+### ADD DEPENDENTE
+POST http://localhost:8383/adddependente
+Content-Type: application/json
+
+{
+    "nome": "Jorge Matias",
+    "data_nascimento": "2012-12-10",
+    "cidade_nascimento": "Peruíbe",
+    "sexo": "Masculino",
+    "grau": "Filho",
+    "funcionario_id": "8wXhNpNqpETKhVyONLeh"
+}
+
+### GET DEPENDENTES POR FUNCIONARIO
+GET http://localhost:8383/funcionario/8wXhNpNqpETKhVyONLeh/dependente

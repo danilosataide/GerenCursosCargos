@@ -93,48 +93,92 @@ app.post('/addfuncionario', async (req, res) => {
 app.patch('/changedepartamento/:doc', async (req, res) => {
     const { doc } = req.params
     const { atributo, newStatus } = req.body
-    
+    const data = { atributo, newStatus }
+    const funcionario = []
+
     try {
         var docRef = await db.collection("funcionario").doc(doc)
         .update({
             [atributo]: newStatus
         }, { merge: true })
-        return res.send({ status: 200, docRef, [atributo]: newStatus })
+        console.log(funcionario)
+
+        // funcionario = funcionario.push({ id: doc.id, data: doc.data() })
+
+        return res.send({ status: 200, docRef })
     } catch (e) {
         return { message: "Error: ", e }
     }
+
+    
+    // if (!doc) {
+    //     return res.sendStatus(404)
+    // } else {
+    //     var docRef = await db.collection("funcionario").doc(doc);
+    //     const data = req.body;
+    //     await updateDoc(docRef, data);
+    //     res.status(200).send('product updated successfully');
+    // }
+
+    // const funcRef = db.collection('funcionario').doc(doc)
+    // // const res2 = await funcRef.set({
+    // //     [departamento]: newStatus
+    // // }, { merge: true })
+    // res.send({ status: 200, funcRef })
 })
 
-app.delete('/removeatributo/:doc', async (req, res) => {
-    const { doc } = req.params
-    console.log(doc)
-    const { atributo } = req.body
-    console.log(atributo)
-    try {
-        var docRef = await db.collection("funcionario").doc(doc)
-        .update({
-            [atributo]: FieldValue.delete()
-        })
-        return res.send({ status: 200, docRef, atributo })
-    } catch (e) {
-        return { message: "Error: ", e }
-    }
+app.delete('/friends', async (req, res) => {
+    const { name } = req.body
+    const peopleRef = db.collection('people').doc('associates')
+    const res2 = await peopleRef.update({
+        [name]: FieldValue.delete()
+    })
+    res.status(200).send(friends)
 })
 
-app.delete('/funcionario/:doc', async (req, res) => {
-    const { doc } = req.params
-    if (!doc) {
-        return res.sendStatus(404)
-    } else {
-        var docRef = await db.collection("funcionario").doc(doc);
-        if((await docRef.get(doc)).data() != null){
-            docRef.delete().then((doc) => {
-                console.log("Document successfully deleted!");
-            }).catch((error) => {
-                console.log("Error removing document:", error);
-                return res.sendStatus(404)
-            });
-        }
-    }
+//OK
+app.post('/adddependente', async (req, res) => {
+  const depRef = db.collection("dependente")
+  const {
+      nome,
+      data_nascimento,
+      cidade_nascimento,
+      sexo,
+      grau,
+      funcionario_id
+  } = req.body;
+
+  await depRef.add({
+      nome,
+      data_nascimento,
+      cidade_nascimento,
+      sexo,
+      grau,
+      funcionario_id
+  })
+  .then((depRef) => {
+      console.log("Document written with ID: ", depRef.id);
+  })
+  .catch((error) => {
+      console.error("Error adding document: ", error);
+  });
+
+  res.status(200).send("ok")
 })
+
+//OK
+app.get('/funcionario/:funcionario/dependente', async (req, res) => {
+  const { funcionario } = req.params
+  const querySnapshot = await db.collection("dependente").get()
+  const dependentes = []
+
+  querySnapshot.forEach(doc => {
+      if(doc.data().funcionario_id == funcionario){
+        dependentes.push({ id: doc.id, data: doc.data() })
+      }
+  })
+
+  res.send({ status: 200, dependentes })
+})
+
 app.listen(port, () => console.log(`Server has started on port: ${port}`))
