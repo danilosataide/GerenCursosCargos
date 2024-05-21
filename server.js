@@ -181,4 +181,13 @@ app.get('/funcionario/:funcionario/dependente', async (req, res) => {
   res.send({ status: 200, dependentes })
 })
 
+//OK
+app.delete('/dependente/:dependente_id', async (req, res) => {
+    const { dependente_id } = req.params
+    const depRef = db.collection('dependente').doc(dependente_id)
+    depRef.delete();
+
+    res.status(200).send("removido")
+})
+
 app.listen(port, () => console.log(`Server has started on port: ${port}`))

@@ -56,3 +56,6 @@ Content-Type: application/json
 
 ### GET DEPENDENTES POR FUNCIONARIO
 GET http://localhost:8383/funcionario/8wXhNpNqpETKhVyONLeh/dependente
+
+### DELETE DEPENDENTES
+DELETE http://localhost:8383/dependente/AAIbzrntUoJZ0jl958mH
