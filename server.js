@@ -266,4 +266,45 @@ app.patch('/curso/:curso_id', async (req, res) => {
     }
 })
 
+app.get('/funcionario/nome/:nome', async (req, res) => {
+    const { nome } = req.params
+    const querySnapshot = await db.collection("funcionario").get()
+    const funcionarios = []
+  
+    querySnapshot.forEach(doc => {
+        if(doc.data().nome == nome){
+          funcionarios.push({ id: doc.id, data: doc.data() })
+        }
+    })
+  
+    res.send({ status: 200, funcionarios })
+})
+
+app.get('/funcionario/:funcionario_id/detalhe', async (req, res) => {
+    const { funcionario_id } = req.params
+    const dependentes = await db.collection("dependente").get()
+    const cursos = await db.collection("curso").get()
+  
+    let retorno = {}
+
+    arrayCursos = []
+    cursos.forEach(doc => {
+        if(doc.data().funcionario_id == funcionario_id){
+          arrayCursos.push({ id: doc.id, data: doc.data() })
+        }
+    })
+    retorno["cursos"] = arrayCursos
+
+    arrayDependentes = []
+    dependentes.forEach(doc => {
+        if(doc.data().funcionario_id == funcionario_id){
+          arrayDependentes.push({ id: doc.id, data: doc.data() })
+        }
+    })
+    retorno["dependentes"] = arrayDependentes
+
+    res.send({ status: 200, retorno })
+})
+  
+
 app.listen(port, () => console.log(`Server has started on port: ${port}`))

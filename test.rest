@@ -94,3 +94,9 @@ Content-Type: application/json
 {
     "atributo": "frequencia", "novoValor": 90
 }
+
+### GET FUNCIONARIOS POR NOME
+GET http://localhost:8383/funcionario/nome/Karlos
+
+### GET DETALHE FUNCIONARIOS
+GET http://localhost:8383/funcionario/8wXhNpNqpETKhVyONLeh/detalhe
