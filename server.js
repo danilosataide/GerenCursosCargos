@@ -21,6 +21,7 @@ app.get('/funcionarios', async (req, res) => {
 //OK
 app.get('/funcionarios/:doc', async (req, res) => {
     const { doc } = req.params
+    const funcionario = []
     if (!doc) {
         return res.sendStatus(404)
     } else {
@@ -28,8 +29,8 @@ app.get('/funcionarios/:doc', async (req, res) => {
         docRef.get().then((doc) => {
             if (doc.exists) {
                 console.log("Document data:", doc.data());
-        
-                return res.status(200)
+                funcionario.push({ id: doc.id, data: doc.data() })
+                return res.send({ status: 200, funcionario })
             } else {
                 // doc.data() will be undefined in this case
                 console.log("No such document!");

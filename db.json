@@ -1,0 +1,38 @@
+[
+    {
+      "id": "1",
+      "nome": "João Silva",
+      "departamento": "TI",
+      "cidade_trabalho": "São Paulo",
+      "cidade_nascimento": "Campinas",
+      "sexo": "Masculino",
+      "data_nascimento": "1985-06-15",
+      "cidade_residência": "São Paulo",
+      "data_admissão": "2010-04-01",
+      "data_demissão": null
+    },
+    {
+      "id": "2",
+      "nome": "Maria Fernanda",
+      "departamento": "Recursos Humanos",
+      "cidade_trabalho": "Rio de Janeiro",
+      "cidade_nascimento": "Rio de Janeiro",
+      "sexo": "Feminino",
+      "data_nascimento": "1990-08-23",
+      "cidade_residência": "Rio de Janeiro",
+      "data_admissão": "2015-08-20",
+      "data_demissão": "2022-12-31"
+    },
+    {
+      "id": "3",
+      "nome": "Carlos Eduardo",
+      "departamento": "Marketing",
+      "cidade_trabalho": "Belo Horizonte",
+      "cidade_nascimento": "Salvador",
+      "sexo": "Masculino",
+      "data_nascimento": "1988-03-10",
+      "cidade_residência": "Belo Horizonte",
+      "data_admissão": "2018-01-15",
+      "data_demissão": null
+    }
+  ]

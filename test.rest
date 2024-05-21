@@ -2,21 +2,21 @@
 GET http://localhost:8383/funcionarios
 
 ### GET FUNCIONARIO
-GET http://localhost:8383/funcionarios/OsnDYYId6WoZ5wTR6glh
+GET http://localhost:8383/funcionarios/vm9ubobFixwBPJr1DJ2L
 
 ### ADD A FUNCIONARIO
 POST http://localhost:8383/addfuncionario
 Content-Type: application/json
 
 {
-    "nome": "João Silva",
-    "departamento": "TI",
-    "cidade_trabalho": "São Paulo",
-    "cidade_nascimento": "Campinas",
+    "nome": "Carlos Eduardo",
+    "departamento": "Marketing",
+    "cidade_trabalho": "Belo Horizonte",
+    "cidade_nascimento": "Salvador",
     "sexo": "Masculino",
-    "data_nascimento": "1985-06-15",
-    "cidade_residência": "São Paulo",
-    "data_admissão": "2010-04-01",
+    "data_nascimento": "1988-03-10",
+    "cidade_residência": "Belo Horizonte",
+    "data_admissão": "2018-01-15",
     "data_demissão": null
 }
 
