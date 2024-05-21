@@ -156,12 +156,6 @@ app.post('/adddependente', async (req, res) => {
       grau,
       funcionario_id
   })
-  .then((depRef) => {
-      console.log("Document written with ID: ", depRef.id);
-  })
-  .catch((error) => {
-      console.error("Error adding document: ", error);
-  });
 
   res.status(200).send("ok")
 })
@@ -197,6 +191,71 @@ app.patch('/dependente/:dependente_id', async (req, res) => {
 
     try {
         var docRef = await db.collection("dependente").doc(dependente_id)
+        .update({
+            [atributo]: novoValor
+        }, { merge: true })
+
+        return res.send({ status: 200, docRef })
+    } catch (e) {
+        return { message: "Error: ", e }
+    }
+})
+
+//OK
+app.post('/addcurso', async (req, res) => {
+    const depRef = db.collection("curso")
+    const {
+      carga_horario,
+      data_conclusao,
+      frequencia,
+      funcionario_id,
+      nome,
+      nota,
+    } = req.body;
+  
+    await depRef.add({
+      carga_horario,
+      data_conclusao,
+      frequencia,
+      funcionario_id,
+      nome,
+      nota
+    })
+  
+    res.status(200).send("ok")
+})
+  
+//OK
+app.get('/funcionario/:funcionario/curso', async (req, res) => {
+    const { funcionario } = req.params
+    const querySnapshot = await db.collection("curso").get()
+    const cursos = []
+  
+    querySnapshot.forEach(doc => {
+        if(doc.data().funcionario_id == funcionario){
+          cursos.push({ id: doc.id, data: doc.data() })
+        }
+    })
+  
+    res.send({ status: 200, cursos })
+})
+  
+//OK
+app.delete('/curso/:curso_id', async (req, res) => {
+    const { curso_id } = req.params
+    const depRef = db.collection('curso').doc(curso_id)
+    depRef.delete();
+
+    res.status(200).send("removido")
+})
+  
+//OK
+app.patch('/curso/:curso_id', async (req, res) => {
+    const { curso_id } = req.params
+    const { atributo, novoValor } = req.body
+
+    try {
+        var docRef = await db.collection("curso").doc(curso_id)
         .update({
             [atributo]: novoValor
         }, { merge: true })

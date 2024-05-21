@@ -67,3 +67,30 @@ Content-Type: application/json
 {
     "atributo": "cidade_nascimento", "novoValor": "Tatuí"
 }
+
+### ADD CURSO
+POST http://localhost:8383/addcurso
+Content-Type: application/json
+
+{
+    "carga_horario": 20,
+    "data_conclusao": "2012-12-10",
+    "frequencia": 80,
+    "funcionario_id": "8wXhNpNqpETKhVyONLeh",
+    "nome": "Desenvolvimento de APIs em JavaScript",
+    "nota": 10
+}
+
+### GET CURSOS POR FUNCIONARIO
+GET http://localhost:8383/funcionario/8wXhNpNqpETKhVyONLeh/curso
+
+### DELETE CURSO
+DELETE http://localhost:8383/curso/6P9o8hxDT4rSVm8NwQ7g
+
+### UPDATE CURSO
+PATCH http://localhost:8383/curso/Tkb9A4S9y17GVx1gfpfr
+Content-Type: application/json
+
+{
+    "atributo": "frequencia", "novoValor": 90
+}
