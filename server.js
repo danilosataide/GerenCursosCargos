@@ -190,6 +190,7 @@ app.delete('/dependente/:dependente_id', async (req, res) => {
     res.status(200).send("removido")
 })
 
+//OK
 app.patch('/dependente/:dependente_id', async (req, res) => {
     const { dependente_id } = req.params
     const { atributo, novoValor } = req.body
