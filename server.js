@@ -190,4 +190,20 @@ app.delete('/dependente/:dependente_id', async (req, res) => {
     res.status(200).send("removido")
 })
 
+app.patch('/dependente/:dependente_id', async (req, res) => {
+    const { dependente_id } = req.params
+    const { atributo, novoValor } = req.body
+
+    try {
+        var docRef = await db.collection("dependente").doc(dependente_id)
+        .update({
+            [atributo]: novoValor
+        }, { merge: true })
+
+        return res.send({ status: 200, docRef })
+    } catch (e) {
+        return { message: "Error: ", e }
+    }
+})
+
 app.listen(port, () => console.log(`Server has started on port: ${port}`))

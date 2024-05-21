@@ -57,5 +57,13 @@ Content-Type: application/json
 ### GET DEPENDENTES POR FUNCIONARIO
 GET http://localhost:8383/funcionario/8wXhNpNqpETKhVyONLeh/dependente
 
-### DELETE DEPENDENTES
+### DELETE DEPENDENTE
 DELETE http://localhost:8383/dependente/AAIbzrntUoJZ0jl958mH
+
+### UPDATE DEPENDENTE
+PATCH http://localhost:8383/dependente/p7eNY3yY6m6U5looSp7u
+Content-Type: application/json
+
+{
+    "atributo": "cidade_nascimento", "novoValor": "Tatuí"
+}
