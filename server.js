@@ -93,47 +93,48 @@ app.post('/addfuncionario', async (req, res) => {
 app.patch('/changedepartamento/:doc', async (req, res) => {
     const { doc } = req.params
     const { atributo, newStatus } = req.body
-    const data = { atributo, newStatus }
-    const funcionario = []
-
+    
     try {
         var docRef = await db.collection("funcionario").doc(doc)
         .update({
             [atributo]: newStatus
         }, { merge: true })
-        console.log(funcionario)
-
-        // funcionario = funcionario.push({ id: doc.id, data: doc.data() })
-
-        return res.send({ status: 200, docRef })
+        return res.send({ status: 200, docRef, [atributo]: newStatus })
     } catch (e) {
         return { message: "Error: ", e }
     }
-
-    
-    // if (!doc) {
-    //     return res.sendStatus(404)
-    // } else {
-    //     var docRef = await db.collection("funcionario").doc(doc);
-    //     const data = req.body;
-    //     await updateDoc(docRef, data);
-    //     res.status(200).send('product updated successfully');
-    // }
-
-    // const funcRef = db.collection('funcionario').doc(doc)
-    // // const res2 = await funcRef.set({
-    // //     [departamento]: newStatus
-    // // }, { merge: true })
-    // res.send({ status: 200, funcRef })
 })
 
-app.delete('/friends', async (req, res) => {
-    const { name } = req.body
-    const peopleRef = db.collection('people').doc('associates')
-    const res2 = await peopleRef.update({
-        [name]: FieldValue.delete()
-    })
-    res.status(200).send(friends)
+app.delete('/removeatributo/:doc', async (req, res) => {
+    const { doc } = req.params
+    console.log(doc)
+    const { atributo } = req.body
+    console.log(atributo)
+    try {
+        var docRef = await db.collection("funcionario").doc(doc)
+        .update({
+            [atributo]: FieldValue.delete()
+        })
+        return res.send({ status: 200, docRef, atributo })
+    } catch (e) {
+        return { message: "Error: ", e }
+    }
 })
 
+app.delete('/funcionario/:doc', async (req, res) => {
+    const { doc } = req.params
+    if (!doc) {
+        return res.sendStatus(404)
+    } else {
+        var docRef = await db.collection("funcionario").doc(doc);
+        if((await docRef.get(doc)).data() != null){
+            docRef.delete().then((doc) => {
+                console.log("Document successfully deleted!");
+            }).catch((error) => {
+                console.log("Error removing document:", error);
+                return res.sendStatus(404)
+            });
+        }
+    }
+})
 app.listen(port, () => console.log(`Server has started on port: ${port}`))

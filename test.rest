@@ -20,7 +20,7 @@ Content-Type: application/json
     "data_demissão": null
 }
 
-### UPDATE STATUS OF A FRIEND
+### UPDATE departamento OF Func
 PATCH http://localhost:8383/changedepartamento/PKAELrb8itikHgDO3BQv
 Content-Type: application/json
 
@@ -29,12 +29,15 @@ Content-Type: application/json
 }
 
 
-# ###DELETE A FRIEND
-# DELETE http://localhost:8383/friends
-# Content-Type: application/json
+###DELETE campo data_demissão
+DELETE http://localhost:8383/removeatributo/vm9ubobFixwBPJr1DJ2L
+Content-Type: application/json
 
-# {
-#     "name": "banana"
-# }
+{
+    "atributo": "data_demissão"
+}
 
+###DELETE funcionario
+DELETE http://localhost:8383/funcionario/r0MKu8s3HsumBlj1Xwf9
+Content-Type: application/json
 
