@@ -1,0 +1,40 @@
+### GET FUNCIONARIOS
+GET http://localhost:8383/funcionarios
+
+### GET FUNCIONARIO
+GET http://localhost:8383/funcionarios/OsnDYYId6WoZ5wTR6glh
+
+### ADD A FUNCIONARIO
+POST http://localhost:8383/addfuncionario
+Content-Type: application/json
+
+{
+    "nome": "João Silva",
+    "departamento": "TI",
+    "cidade_trabalho": "São Paulo",
+    "cidade_nascimento": "Campinas",
+    "sexo": "Masculino",
+    "data_nascimento": "1985-06-15",
+    "cidade_residência": "São Paulo",
+    "data_admissão": "2010-04-01",
+    "data_demissão": null
+}
+
+# ### UPDATE STATUS OF A FRIEND
+# PATCH http://localhost:8383/changestatus
+# Content-Type: application/json
+
+# {
+#     "nome": "João Silva",
+# }
+
+
+# ###DELETE A FRIEND
+# DELETE http://localhost:8383/friends
+# Content-Type: application/json
+
+# {
+#     "name": "banana"
+# }
+
+
