@@ -4,6 +4,17 @@ const app = express()
 const port = 8383
 const { db } = require('./firebase.js')
 
+const {
+    getFirestore,
+    collection,
+    addDoc,
+    getDocs,
+    doc,
+    getDoc,
+    updateDoc,
+    deleteDoc
+}= require('firebase/firestore')
+
 app.use(express.json())
 
 //OK
@@ -79,14 +90,41 @@ app.post('/addfuncionario', async (req, res) => {
     res.status(200).send("ok")
 })
 
-app.patch('/changestatus', async (req, res) => {
-    const { name, newStatus } = req.body
-    const peopleRef = db.collection('people').doc('associates')
-    const res2 = await peopleRef.set({
-        [name]: newStatus
-    }, { merge: true })
-    // friends[name] = newStatus
-    res.status(200).send(friends)
+app.patch('/changedepartamento/:doc', async (req, res) => {
+    const { doc } = req.params
+    const { atributo, newStatus } = req.body
+    const data = { atributo, newStatus }
+    const funcionario = []
+
+    try {
+        var docRef = await db.collection("funcionario").doc(doc)
+        .update({
+            [atributo]: newStatus
+        }, { merge: true })
+        console.log(funcionario)
+
+        // funcionario = funcionario.push({ id: doc.id, data: doc.data() })
+
+        return res.send({ status: 200, docRef })
+    } catch (e) {
+        return { message: "Error: ", e }
+    }
+
+    
+    // if (!doc) {
+    //     return res.sendStatus(404)
+    // } else {
+    //     var docRef = await db.collection("funcionario").doc(doc);
+    //     const data = req.body;
+    //     await updateDoc(docRef, data);
+    //     res.status(200).send('product updated successfully');
+    // }
+
+    // const funcRef = db.collection('funcionario').doc(doc)
+    // // const res2 = await funcRef.set({
+    // //     [departamento]: newStatus
+    // // }, { merge: true })
+    // res.send({ status: 200, funcRef })
 })
 
 app.delete('/friends', async (req, res) => {

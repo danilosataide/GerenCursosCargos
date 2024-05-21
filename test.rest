@@ -20,13 +20,13 @@ Content-Type: application/json
     "data_demissão": null
 }
 
-# ### UPDATE STATUS OF A FRIEND
-# PATCH http://localhost:8383/changestatus
-# Content-Type: application/json
+### UPDATE STATUS OF A FRIEND
+PATCH http://localhost:8383/changedepartamento/PKAELrb8itikHgDO3BQv
+Content-Type: application/json
 
-# {
-#     "nome": "João Silva",
-# }
+{
+    "atributo": "departamento", "newStatus": "TI"
+}
 
 
 # ###DELETE A FRIEND
